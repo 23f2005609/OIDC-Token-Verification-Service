@@ -7,7 +7,10 @@ app = FastAPI()
 class TokenRequest(BaseModel):
     token: str
 
+# FIX: We are now catching "/", "/verify", and "/verify/"
+@app.post("/")
 @app.post("/verify")
+@app.post("/verify/")
 async def verify_token(request: TokenRequest):
     print("\n--- 🚨 NEW GRADER REQUEST DETECTED ---")
     print(f"RAW TOKEN: {request.token}")
